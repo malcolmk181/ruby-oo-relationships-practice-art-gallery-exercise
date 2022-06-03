@@ -21,10 +21,16 @@ class Artist
 
   def galleries
     paintings.collect { |painting| painting.gallery }
+
+    # an improvement - make unique
+    # paintings.collect { |painting| painting.gallery }.uniq
   end
 
   def cities
     galleries.collect { |gallery| gallery.city }
+
+    # an improvement - make unique
+    # galleries.collect { |gallery| gallery.city }.uniq
   end
 
   def self.total_experience
@@ -52,7 +58,14 @@ class Artist
     # most_prolific_artist
 
     most_prolific_artist2 = Artist.all.max {|artist1, artist2| (artist1.paintings.count / artist1.years_experience) <=> (artist2.paintings.count / artist2.years_experience) }
+
+    # an improvement - use max_by AND add a score method
+    # Artist.all.max_by {|artist| artist.score }
   end
+
+  # def score
+    # paintings.count.to_f / years_experience.to_f
+  # end
 
   def create_painting(title, price, gallery)
     painting = Painting.new(title, price)
